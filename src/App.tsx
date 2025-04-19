@@ -1,5 +1,6 @@
 import { styled } from '../styled-system/jsx'
 import Header from './components/Header'
+import StickyBar from './components/StickyBar'
 
 const Container = styled('div', {
   base: {
@@ -14,6 +15,7 @@ function App() {
     <>
       <Container>
         <Header />
+        <StickyBar />
         Hello 🐼!
       </Container>
     </>
