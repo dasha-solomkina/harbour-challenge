@@ -1,15 +1,21 @@
 import { styled } from '../styled-system/jsx'
+import Header from './components/Header'
 
 const Container = styled('div', {
   base: {
-    color: 'blue',
-  },
+    color: '#535353',
+    height: '100vh',
+    width: '100%'
+  }
 })
 
 function App() {
   return (
     <>
-      <Container>Hello 🐼!</Container>
+      <Container>
+        <Header />
+        Hello 🐼!
+      </Container>
     </>
   )
 }
