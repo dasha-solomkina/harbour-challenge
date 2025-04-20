@@ -8,8 +8,9 @@ const triggerStyles = css({
 
 const contentStyles = css({
   border: '1px solid #DADADA',
-  padding: 2,
-  borderRadius: 8,
+  px: 4,
+  py: 2,
+  borderRadius: 16,
   backgroundColor: 'white'
 })
 

@@ -1,5 +1,6 @@
 import { styled } from '../styled-system/jsx'
 import AboutSection from './components/AboutSection'
+import Details from './components/Details'
 import Header from './components/Header'
 // import StickyBar from './components/StickyBar'
 
@@ -18,6 +19,7 @@ function App() {
         <Header />
         {/* <StickyBar /> */}
         <AboutSection />
+        <Details />
         Hello 🐼!
       </Container>
     </>
