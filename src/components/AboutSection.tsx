@@ -11,13 +11,13 @@ const AboutSection = () => {
         width={440}
         height={440}
         borderRadius="full"
-        backgroundImage="url('public/pattern.png')"
+        backgroundImage="url('pattern.png')"
         backgroundSize="cover"
         backgroundPosition="center"
       >
         <Avatar.Root>
           <Avatar.Image
-            src="public/default.png"
+            src="default.png"
             alt="Harbour Space student"
             style={{
               borderRadius: '50%',
