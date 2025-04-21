@@ -1,29 +1,6 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
-import { css } from '../../styled-system/css'
-
-const triggerStyles = css({
-  cursor: 'pointer'
-})
-
-const contentStyles = css({
-  border: '1px solid #DADADA',
-  px: 4,
-  py: 2,
-  borderRadius: 16,
-  backgroundColor: 'white'
-})
-
-const itemStyles = css({
-  color: '#535353',
-  padding: 1,
-  _highlighted: {
-    backgroundColor: '#f5f5f5',
-    outline: 'none',
-    boxShadow: 'none',
-    cursor: 'pointer'
-  }
-})
+import { contentStyles, itemStyles, triggerStyles } from './DropdownMenuStyles'
 
 const MenuDropDown = () => {
   return (

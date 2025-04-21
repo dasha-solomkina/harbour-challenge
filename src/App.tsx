@@ -1,6 +1,7 @@
 import { Flex, styled } from '../styled-system/jsx'
 import AboutSection from './components/AboutSection'
 import Details from './components/Details'
+import FAQ from './components/FAQ'
 // import FeedbackCard from './components/FeedbackCard'
 import FeedbackSlider from './components/FeedbackSlider'
 import Header from './components/Header'
@@ -25,6 +26,7 @@ function App() {
         <Details />
         {/* <FeedbackCard /> */}
         <FeedbackSlider />
+        <FAQ />
       </Container>
     </>
   )
