@@ -1,7 +1,7 @@
 import { Flex, styled } from '../../styled-system/jsx'
 import * as Separator from '@radix-ui/react-separator'
 
-const Title = styled('p', {
+export const Title = styled('p', {
   base: {
     color: '#685DC5',
     fontSize: 16,
@@ -11,17 +11,17 @@ const Title = styled('p', {
 
 const Subtitle = styled('p', {
   base: {
-    color: '##6A6A6A',
+    color: '#6A6A6A',
     fontSize: 26,
     fontWeight: 300
   }
 })
 
-const SubtitleSmall = styled('p', {
+export const SubtitleSmall = styled('p', {
   base: {
-    color: '###535353',
+    color: '#535353',
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: 300,
     lineHeight: 1.5
   }
 })

@@ -5,6 +5,7 @@ import FAQ from './components/FAQ'
 // import FeedbackCard from './components/FeedbackCard'
 import FeedbackSlider from './components/FeedbackSlider'
 import Header from './components/Header'
+import HeroSection from './components/HeroSection'
 // import StickyBar from './components/StickyBar'
 
 const Container = styled(Flex, {
@@ -21,6 +22,7 @@ function App() {
     <>
       <Container>
         <Header />
+        <HeroSection />
         {/* <StickyBar /> */}
         <AboutSection />
         <Details />
