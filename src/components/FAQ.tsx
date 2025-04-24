@@ -4,39 +4,7 @@ import { css } from '../../styled-system/css/css'
 import { CaretDownIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
 import { SectionTitle } from './HeroSection'
-
-type FAQItem = {
-  id: string
-  question: string
-  type: string
-  answer: string
-}
-
-const options = [
-  'Program conditions',
-  'Admissions',
-  'Harbour.Space',
-  'Living in Barcelona',
-  'Faculty',
-  'Scholarship'
-]
-
-const faqData: FAQItem[] = [
-  {
-    id: 'item-1',
-    question: 'What is Birdie?',
-    type: 'Program conditions',
-    answer:
-      "What are my obligations? The majority of our students receive numerous job offers at the end of the second academic year of their Bachelor's programme and at the end of the first academic year of their Master's programme. The best applicants receive an offer from our industrial partners at the beginning of their programmes. Harbour.Space is highly recognized among innovative employers and is strategic partner of B.Grimm multi- industry corporation with 140 years of history in Thailand. Together we insure students get the best knowledge about the current job market opportunities. We offer our students paid internships options during studies jointly with our industrial partners. Employers that hired graduates of Harbour.Space in the past include Google, IBM, Accenture, Typeform, Frog, and other tech centric companies. Our industry specific employability report could be provided to you separately during the admission process."
-  },
-  {
-    id: 'item-2',
-    question: 'How does it work?',
-    type: 'Program conditions',
-    answer:
-      'It collects, organizes and generates insights from customer feedback.'
-  }
-]
+import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 
 const wrapperStyles = (isOpen: boolean) =>
   css({
@@ -64,7 +32,7 @@ const triggerRow = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  width: 200
+  width: 250
 })
 
 const itemStyles = css({
@@ -76,14 +44,20 @@ const itemStyles = css({
   }
 })
 
-const CustomDropdown = () => {
+const CustomDropdown = ({
+  filterOptions,
+  selected,
+  onSelect
+}: {
+  filterOptions: string[]
+  selected: string
+  onSelect: (value: string) => void
+}) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selected, setSelected] = useState(options[0])
 
   const handleSelect = (option: string) => {
-    setSelected(option)
+    onSelect(option)
     setIsOpen(false)
-    console.log('Selected:', option)
   }
 
   return (
@@ -100,7 +74,7 @@ const CustomDropdown = () => {
         />
       </Flex>
 
-      {options
+      {filterOptions
         .filter((option) => option !== selected)
         .map((option) => (
           <Flex
@@ -125,11 +99,10 @@ const StyledTrigger = styled(Accordion.Trigger, {
     py: '16px',
     borderTop: '1px solid #E6E6E6',
     alignItems: 'center',
-    gap: 100,
     cursor: 'pointer',
     fontWeight: 500,
     fontSize: 22,
-    textAlign: 'left',
+    textAlign: 'start',
     color: '#685DC5'
   }
 })
@@ -156,12 +129,23 @@ const PlusButton = ({ open }: { open: boolean }) => {
 }
 
 const FAQ = () => {
+  const { apprenticeship } = useApprenticeshipStore()
+  const faqData = apprenticeship?.faq
+  const filterOptions = [
+    'All',
+    ...new Set(faqData?.map((question) => question.type) || [])
+  ]
+  const [selectedFilter, setSelectedFilter] = useState('All')
   const [openItem, setOpenItem] = useState<string | null>(null)
-  console.log({ openItem })
 
   const handleItemChange = (value: string) => {
     setOpenItem(value)
   }
+
+  const filteredFaqData = faqData?.filter(
+    (item) => selectedFilter === 'All' || item.type === selectedFilter
+  )
+
   return (
     <Flex direction="column" pb={40} px={40} id="faq-section">
       <Flex width="100%" alignItems="center" gap={5} pb={10}>
@@ -178,13 +162,17 @@ const FAQ = () => {
             color: '#6A6A6A',
             fontSize: 16,
             fontWeight: 300,
-            marginRight: 250
+            marginRight: 300
           }}
         >
           Filter by:
         </p>
         <Flex position="relative" style={{ transform: 'translateY(-24px)' }}>
-          <CustomDropdown />
+          <CustomDropdown
+            filterOptions={filterOptions}
+            selected={selectedFilter}
+            onSelect={setSelectedFilter}
+          />
         </Flex>
       </Flex>
 
@@ -193,13 +181,14 @@ const FAQ = () => {
         collapsible
         onValueChange={handleItemChange}
       >
-        {faqData.map((item) => (
-          <Accordion.Item key={item.id} value={item.id}>
+        {filteredFaqData?.map((item) => (
+          <Accordion.Item key={item.question} value={item.question}>
             <Accordion.Header>
               <StyledTrigger>
                 <p
                   style={{
-                    width: 250
+                    width: 300,
+                    marginRight: 30
                   }}
                 >
                   {item.type}
@@ -207,13 +196,17 @@ const FAQ = () => {
                 <p
                   style={{
                     color: '#535353',
-                    marginRight: 'auto'
+                    marginRight: 'auto',
+
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
                   }}
                 >
                   {item.question}
                 </p>
 
-                <PlusButton open={openItem === item.id} />
+                <PlusButton open={openItem === item.question} />
               </StyledTrigger>
             </Accordion.Header>
             <Accordion.Content>
@@ -225,7 +218,7 @@ const FAQ = () => {
                 pr={20}
                 pb={10}
               >
-                {item.answer}
+                {item.answer[0].data}
               </Flex>
             </Accordion.Content>
           </Accordion.Item>

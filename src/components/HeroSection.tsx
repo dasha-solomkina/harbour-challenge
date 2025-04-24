@@ -1,5 +1,8 @@
+import { addYears, format } from 'date-fns'
 import { Flex, styled } from '../../styled-system/jsx'
+import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 import { Title, SubtitleSmall } from './Card'
+import Countdown from './Countdown'
 import { ActionButton } from './FeedbackCard'
 
 const Card = styled(Flex, {
@@ -47,6 +50,21 @@ export const SectionTitle = styled('h2', {
 })
 
 const HeroSection = () => {
+  const { apprenticeship } = useApprenticeshipStore()
+
+  if (!apprenticeship) return <></>
+  const formattedStartDate = format(
+    new Date(apprenticeship.scholarship_start_date),
+    'dd MMMM yyyy'
+  )
+
+  const endDate = addYears(
+    apprenticeship.scholarship_start_date,
+    apprenticeship.duration
+  )
+
+  const formattedEndDate = format(endDate, 'dd MMMM yyyy')
+
   return (
     <Flex
       px={60}
@@ -63,18 +81,13 @@ const HeroSection = () => {
         fontWeight={300}
         lineHeight="1.6"
       >
-        <SectionTitle>Interaction Design Apprenticeship</SectionTitle>
+        <SectionTitle>{apprenticeship.name}</SectionTitle>
         <p style={{ fontWeight: 500 }}>
           A fully funded work-study program to launch your tech career
         </p>
+        <p>{apprenticeship.description}</p>
         <p>
-          Harbour.Space has partnered with SCG to empower driven talent and
-          eliminate the barriers to accessing exceptional education and career
-          opportunities through a Masters Fellowship.
-        </p>
-        <p>
-          <span style={{ fontWeight: 500 }}>Position: </span>Marketing
-          Performance
+          <span style={{ fontWeight: 500 }}>Position: </span>Game Analyst Intern
         </p>
         <ActionButton width={166} height={58}>
           Apply Now
@@ -88,7 +101,11 @@ const HeroSection = () => {
         fontWeight={300}
       >
         <Flex gap={8} alignItems="center">
-          <img src="public/logo.png" alt="Logo" style={{ width: 80 }} />
+          <img
+            src={apprenticeship.company_logo}
+            alt="Logo"
+            style={{ width: 80 }}
+          />
           <Flex direction="column">
             <p
               style={{
@@ -99,43 +116,30 @@ const HeroSection = () => {
             >
               Powered by:
             </p>
-            <p style={{ fontSize: 27 }}>Zeptolab</p>
+            <p style={{ fontSize: 27 }}>{apprenticeship.company_name}</p>
           </Flex>
         </Flex>
         <Card>
-          <p
-            style={{
-              color: '#685DC5',
-              fontWeight: 500,
-              fontSize: 16
-            }}
-          >
-            Application closes in
-          </p>
-          <p
-            style={{
-              fontSize: 27
-            }}
-          >
-            6 Day : 22 Hrs : 56 Min : 13 Seg{' '}
-          </p>
+          <Countdown baseDate={apprenticeship.application_end_date} />
         </Card>
         <Card>
           <DetailsContainer>
             <Title>Location</Title>
-            <SubtitleSmall>Bangkok</SubtitleSmall>
+            <SubtitleSmall>{apprenticeship.location}</SubtitleSmall>
           </DetailsContainer>
           <DetailsContainer>
             <Title>Duration</Title>
-            <SubtitleSmall>1 Year Full-Time</SubtitleSmall>
+            <SubtitleSmall>
+              {`${apprenticeship.duration} Year Full-Time`}
+            </SubtitleSmall>
           </DetailsContainer>
           <DetailsContainer>
             <Title>Start date</Title>
-            <SubtitleSmall>30 June 2020</SubtitleSmall>
+            <SubtitleSmall>{formattedStartDate}</SubtitleSmall>
           </DetailsContainer>
           <DetailsContainer>
             <Title>End date</Title>
-            <SubtitleSmall>3 Aug 2020</SubtitleSmall>
+            <SubtitleSmall>{formattedEndDate}</SubtitleSmall>
           </DetailsContainer>
         </Card>
       </Flex>

@@ -1,5 +1,6 @@
 import { Flex, styled } from '../../styled-system/jsx'
 import MenuDropDown from './MenuDropDown'
+import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 
 const ApplyNowIcon = styled(Flex, {
   base: {
@@ -20,6 +21,8 @@ const ApplyNowIcon = styled(Flex, {
 })
 
 const Header = () => {
+  const { apprenticeship } = useApprenticeshipStore()
+
   return (
     <Flex height={130} direction="column">
       <Flex
@@ -34,7 +37,7 @@ const Header = () => {
       >
         <Flex gap={2}>
           <h1 style={{ fontWeight: 700 }}>HARBOUR.SPACE</h1>
-          <span style={{ fontSize: '0.8rem' }}>/INTERACTION DESIGN</span>
+          <span style={{ fontSize: '0.8rem' }}>/{apprenticeship?.name}</span>
         </Flex>
         <MenuDropDown />
       </Flex>

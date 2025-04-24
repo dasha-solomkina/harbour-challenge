@@ -5,7 +5,7 @@ import useApprenticeshipStore from './useApprenticeshipStore'
 export const useApprenticeship = () => {
   const [loading, setLoading] = useState(true)
   const setApprenticeship = useApprenticeshipStore(
-    (state) => state.setApprenticeship,
+    (state) => state.setApprenticeship
   )
 
   useEffect(() => {
@@ -21,6 +21,7 @@ export const useApprenticeship = () => {
           application_end_date: data.scholarship.application_end_date,
           duration: data.scholarship.duration,
           company_name: data.scholarship.company.name,
+          company_logo: data.scholarship.company.logo_dark.src,
           about_text: data.scholarship.about[0].data,
           tuition: data.scholarship.tuition,
           total_value: data.scholarship.total_value,
@@ -32,7 +33,7 @@ export const useApprenticeship = () => {
           internship_commitment: data.scholarship.internship_commitment,
           internship_commitment_text:
             data.scholarship.internship_commitment_text,
-          faq: data.scholarship.faqs.items,
+          faq: data.scholarship.faqs.items
         }
 
         setApprenticeship(mappedData)

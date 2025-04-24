@@ -1,4 +1,7 @@
+import { addYears, format } from 'date-fns'
 import { Flex, styled } from '../../styled-system/jsx'
+import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
+import { MiniCountdown } from './Countdown'
 
 const Title = styled('p', {
   base: {
@@ -13,6 +16,21 @@ const SubTitle = styled('p', {
 })
 
 const StickyBar = () => {
+  const { apprenticeship } = useApprenticeshipStore()
+  if (!apprenticeship) return <></>
+
+  const formattedStartDate = format(
+    new Date(apprenticeship.scholarship_start_date),
+    'dd MMMM yyyy'
+  )
+
+  const endDate = addYears(
+    apprenticeship.scholarship_start_date,
+    apprenticeship.duration
+  )
+
+  const formattedEndDate = format(endDate, 'dd MMMM yyyy')
+
   return (
     <Flex
       height={86}
@@ -29,8 +47,8 @@ const StickyBar = () => {
       zIndex={9999}
     >
       <Flex direction="column">
-        <Title>Zeptolab</Title>
-        <SubTitle>Marketing Performance</SubTitle>
+        <Title>{apprenticeship?.company_name}</Title>
+        <SubTitle>Game Analyst Intern</SubTitle>
       </Flex>
       <Flex direction="column">
         <Title>Location</Title>
@@ -38,19 +56,21 @@ const StickyBar = () => {
       </Flex>
       <Flex direction="column">
         <Title>Duration</Title>
-        <SubTitle>1 Year Full-Time</SubTitle>
+        <SubTitle> {`${apprenticeship?.duration} Year Full-Time`}</SubTitle>
       </Flex>
       <Flex direction="column">
         <Title>Start date</Title>
-        <SubTitle>3 Aug 2020</SubTitle>
+        <SubTitle>{formattedStartDate}</SubTitle>
       </Flex>
       <Flex direction="column">
         <Title>Application deadline</Title>
-        <SubTitle>30 June 2020</SubTitle>
+        <SubTitle>{formattedEndDate}</SubTitle>
       </Flex>
       <Flex direction="column">
         <Title>Application closes in</Title>
-        <SubTitle>6 Day : 22 Hrs : 56 Min</SubTitle>
+        <SubTitle>
+          <MiniCountdown baseDate={apprenticeship.application_end_date} />
+        </SubTitle>
       </Flex>
     </Flex>
   )
