@@ -10,6 +10,7 @@ const AboutSection = () => {
       px={60}
       pt={20}
       id="about-section"
+      flexDirection={{ base: 'column', lg: 'row' }}
     >
       <Flex
         justify="center"
