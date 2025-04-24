@@ -41,6 +41,9 @@ const FeedbackCard = () => {
       height={400}
       alignItems="center"
       backgroundColor="#FBFBFB"
+      fontWeight={300}
+      fontSize={16}
+      color="#535353"
     >
       <Flex gap={10} pl={5} pt={5} pr={10} alignItems="center" width="100%">
         <Avatar.Root>
@@ -57,12 +60,8 @@ const FeedbackCard = () => {
           <Avatar.Fallback delayMs={600}>Harbour Space student</Avatar.Fallback>
         </Avatar.Root>
         <Flex direction="column" mr="auto">
-          <p style={{ color: '#535353', fontSize: 16, fontWeight: 500 }}>
-            Irene Pereyra
-          </p>
-          <p style={{ color: '#535353', fontSize: 16, fontWeight: 300 }}>
-            Interaction Design Fellow ‘19
-          </p>
+          <p style={{ fontWeight: 500 }}>Irene Pereyra</p>
+          <p>Interaction Design Fellow ‘19</p>
         </Flex>
         <a
           href="https://www.linkedin.com/school/harbour-space/"
@@ -74,17 +73,12 @@ const FeedbackCard = () => {
         </a>
       </Flex>
       <Flex direction="column" width="80%" gap={10}>
-        {/* <ActionButton style={{ width: 120, height: 57, alignSelf: 'end' }}>
-          Drag
-        </ActionButton> */}
-        <p style={{ fontSize: 26, fontWeight: 300, color: '#6A6A6A' }}>
+        <p style={{ fontSize: 26, color: '#6A6A6A' }}>
           This Fellowship was a turning point in my career. I wouldn’t be where
           I am today without the financial support and experienced offered
           through the program.
         </p>
-        <p style={{ fontSize: 16, fontWeight: 300, color: '#535353' }}>
-          Education · B.A. Visual Design
-        </p>
+        <p>Education · B.A. Visual Design</p>
       </Flex>
     </Flex>
   )

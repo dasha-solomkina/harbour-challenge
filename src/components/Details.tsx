@@ -1,6 +1,6 @@
 import * as Separator from '@radix-ui/react-separator'
 import { Flex } from '../../styled-system/jsx'
-import { Card, CardExtended } from './Card'
+import { DetailsCard, DetailsCardExtended } from './Card'
 
 const SeparatorWithText = () => {
   return (
@@ -24,17 +24,17 @@ const SeparatorWithText = () => {
 
 const Details = () => {
   return (
-    <Flex width="100%" justifyContent="center" gap={10} px={80} mt={20}>
+    <Flex width="100%" justifyContent="center" gap={10} px={80} mt={20} mb={60}>
       <Flex>
-        <CardExtended />
+        <DetailsCardExtended />
       </Flex>
       <Flex direction="column" gap={10}>
         <Flex gap={10}>
-          <Card />
-          <Card />
+          <DetailsCard />
+          <DetailsCard />
         </Flex>
         <SeparatorWithText />
-        <Card />
+        <DetailsCard />
       </Flex>
     </Flex>
   )

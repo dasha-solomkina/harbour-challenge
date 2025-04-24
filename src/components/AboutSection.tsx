@@ -1,9 +1,16 @@
 import { Flex } from '../../styled-system/jsx'
 import * as Avatar from '@radix-ui/react-avatar'
+import { SectionTitle } from './HeroSection'
 
 const AboutSection = () => {
   return (
-    <Flex width="100%" justifyContent="center" gap={40}>
+    <Flex
+      width="100%"
+      justifyContent="space-between"
+      px={60}
+      pt={20}
+      id="about-section"
+    >
       <Flex
         justify="center"
         align="center"
@@ -29,24 +36,17 @@ const AboutSection = () => {
           <Avatar.Fallback delayMs={600}>Harbour Space student</Avatar.Fallback>
         </Avatar.Root>
       </Flex>
-      <Flex width={480} direction="column" gap={10} mt={10}>
-        <h2
-          style={{
-            color: '#685DC5',
-            fontWeight: 500,
-            fontSize: 48,
-            lineHeight: 1.2
-          }}
-        >
-          About the apprenticeship
-        </h2>
-        <p
-          style={{
-            fontWeight: 300,
-            fontSize: 22,
-            lineHeight: 1.5
-          }}
-        >
+      <Flex
+        width={480}
+        direction="column"
+        gap={10}
+        mt={10}
+        fontWeight={300}
+        fontSize={22}
+        lineHeight="1.5"
+      >
+        <SectionTitle>About the apprenticeship</SectionTitle>
+        <p>
           Our scholarships are designed to give talented and driven young people
           from any background access to top-class education, experience and
           network. We offer a fully-funded master’s degree alongside an

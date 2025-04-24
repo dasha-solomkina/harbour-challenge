@@ -18,8 +18,8 @@ const Card = styled(Flex, {
 const BackgroundPattern = styled(Flex, {
   base: {
     position: 'absolute',
-    top: '95%',
-    left: '65%',
+    top: '75%',
+    left: '60%',
     transform: 'translateX(h50%)',
     width: 560,
     height: 257,
@@ -30,29 +30,49 @@ const BackgroundPattern = styled(Flex, {
   }
 })
 
+const DetailsContainer = styled(Flex, {
+  base: {
+    flexDirection: 'column',
+    width: 'calc(50% - 10px)'
+  }
+})
+
+export const SectionTitle = styled('h2', {
+  base: {
+    color: '#685DC5',
+    fontWeight: 500,
+    fontSize: 48,
+    lineHeight: '1.3'
+  }
+})
+
 const HeroSection = () => {
   return (
-    <Flex width="100%" px={40} color="#535353" gap={20}>
-      <Flex direction="column" width="50%" gap={6}>
-        <p
-          style={{
-            color: '#685DC5',
-            fontWeight: 500,
-            fontSize: 48,
-            lineHeight: '1.3'
-          }}
-        >
-          Interaction Design Apprenticeship
-        </p>
-        <p style={{ fontWeight: 500, fontSize: 22 }}>
+    <Flex
+      px={60}
+      color="#535353"
+      id="hero-section"
+      mb={10}
+      justifyContent="space-between"
+    >
+      <Flex
+        direction="column"
+        maxWidth={440}
+        gap={8}
+        fontSize={22}
+        fontWeight={300}
+        lineHeight="1.6"
+      >
+        <SectionTitle>Interaction Design Apprenticeship</SectionTitle>
+        <p style={{ fontWeight: 500 }}>
           A fully funded work-study program to launch your tech career
         </p>
-        <p style={{ fontWeight: 300, fontSize: 22 }}>
+        <p>
           Harbour.Space has partnered with SCG to empower driven talent and
           eliminate the barriers to accessing exceptional education and career
           opportunities through a Masters Fellowship.
         </p>
-        <p style={{ fontWeight: 300, fontSize: 22 }}>
+        <p>
           <span style={{ fontWeight: 500 }}>Position: </span>Marketing
           Performance
         </p>
@@ -60,13 +80,18 @@ const HeroSection = () => {
           Apply Now
         </ActionButton>
       </Flex>
-      <Flex width="50%" direction="column" gap={10} position="relative">
+      <Flex
+        maxWidth={480}
+        direction="column"
+        gap={10}
+        position="relative"
+        fontWeight={300}
+      >
         <Flex gap={8} alignItems="center">
           <img src="public/logo.png" alt="Logo" style={{ width: 80 }} />
           <Flex direction="column">
             <p
               style={{
-                fontWeight: 300,
                 fontSize: 18,
                 color: '#000000',
                 opacity: '0.5'
@@ -74,7 +99,7 @@ const HeroSection = () => {
             >
               Powered by:
             </p>
-            <p style={{ fontWeight: 300, fontSize: 27 }}>Zeptolab</p>
+            <p style={{ fontSize: 27 }}>Zeptolab</p>
           </Flex>
         </Flex>
         <Card>
@@ -89,7 +114,6 @@ const HeroSection = () => {
           </p>
           <p
             style={{
-              fontWeight: 300,
               fontSize: 27
             }}
           >
@@ -97,22 +121,22 @@ const HeroSection = () => {
           </p>
         </Card>
         <Card>
-          <Flex direction="column" style={{ width: 'calc(50% - 10px)' }}>
+          <DetailsContainer>
             <Title>Location</Title>
             <SubtitleSmall>Bangkok</SubtitleSmall>
-          </Flex>
-          <Flex direction="column" style={{ width: 'calc(50% - 10px)' }}>
+          </DetailsContainer>
+          <DetailsContainer>
             <Title>Duration</Title>
             <SubtitleSmall>1 Year Full-Time</SubtitleSmall>
-          </Flex>
-          <Flex direction="column" style={{ width: 'calc(50% - 10px)' }}>
+          </DetailsContainer>
+          <DetailsContainer>
             <Title>Start date</Title>
             <SubtitleSmall>30 June 2020</SubtitleSmall>
-          </Flex>
-          <Flex direction="column" style={{ width: 'calc(50% - 10px)' }}>
+          </DetailsContainer>
+          <DetailsContainer>
             <Title>End date</Title>
             <SubtitleSmall>3 Aug 2020</SubtitleSmall>
-          </Flex>
+          </DetailsContainer>
         </Card>
       </Flex>
       <BackgroundPattern />

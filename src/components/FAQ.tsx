@@ -1,8 +1,9 @@
-import { Flex } from '../../styled-system/jsx'
+import { Flex, styled } from '../../styled-system/jsx'
 import * as Accordion from '@radix-ui/react-accordion'
 import { css } from '../../styled-system/css/css'
 import { CaretDownIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
+import { SectionTitle } from './HeroSection'
 
 type FAQItem = {
   id: string
@@ -13,10 +14,11 @@ type FAQItem = {
 
 const options = [
   'Program conditions',
-  'All',
   'Admissions',
   'Harbour.Space',
-  'Living in Barcelona'
+  'Living in Barcelona',
+  'Faculty',
+  'Scholarship'
 ]
 
 const faqData: FAQItem[] = [
@@ -38,6 +40,9 @@ const faqData: FAQItem[] = [
 
 const wrapperStyles = (isOpen: boolean) =>
   css({
+    position: 'absolute',
+    top: 0,
+    right: 0,
     border: '1px solid #DADADA',
     borderRadius: 30,
     padding: '12px 24px',
@@ -47,20 +52,19 @@ const wrapperStyles = (isOpen: boolean) =>
     fontWeight: 500,
     display: 'flex',
     flexDirection: 'column',
-    // gap: 8,
-    maxHeight: isOpen ? '500px' : '60px',
+    backgroundColor: 'white',
+    zIndex: 1000,
+    maxHeight: isOpen ? '300px' : '50px',
     overflow: 'hidden',
     transition: 'max-height 0.3s ease-in-out',
-    position: 'relative',
-    backgroundColor: 'white',
-    zIndex: 1000
+    boxShadow: isOpen ? '0px 4px 8px rgba(0, 0, 0, 0.1)' : 'none'
   })
 
 const triggerRow = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  width: '100%'
+  width: 200
 })
 
 const itemStyles = css({
@@ -83,11 +87,10 @@ const CustomDropdown = () => {
   }
 
   return (
-    <div className={wrapperStyles(isOpen)} onClick={() => setIsOpen(!isOpen)}>
-      <div className={triggerRow}>
+    <Flex className={wrapperStyles(isOpen)} onClick={() => setIsOpen(!isOpen)}>
+      <Flex className={triggerRow}>
         {selected}
         <CaretDownIcon
-          className="caret-icon"
           height={20}
           width={20}
           style={{
@@ -95,76 +98,108 @@ const CustomDropdown = () => {
             transform: isOpen ? 'scaleY(-1)' : 'none'
           }}
         />
-      </div>
+      </Flex>
 
-      {isOpen && (
-        <div>
-          {/* TODO: fix so that it does not move other components on open */}
-          {options
-            .filter((option) => option !== selected)
-            .map((option) => (
-              <div
-                key={option}
-                className={itemStyles}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleSelect(option)
-                }}
-              >
-                {option}
-              </div>
-            ))}
-        </div>
-      )}
-    </div>
+      {options
+        .filter((option) => option !== selected)
+        .map((option) => (
+          <Flex
+            key={option}
+            className={itemStyles}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleSelect(option)
+            }}
+          >
+            {option}
+          </Flex>
+        ))}
+    </Flex>
+  )
+}
+
+const StyledTrigger = styled(Accordion.Trigger, {
+  base: {
+    width: '100%',
+    display: 'flex',
+    py: '16px',
+    borderTop: '1px solid #E6E6E6',
+    alignItems: 'center',
+    gap: 100,
+    cursor: 'pointer',
+    fontWeight: 500,
+    fontSize: 22,
+    textAlign: 'left',
+    color: '#685DC5'
+  }
+})
+
+const PlusButton = ({ open }: { open: boolean }) => {
+  return (
+    <Flex
+      style={{
+        borderRadius: '100%',
+        fontWeight: 300,
+        fontSize: 30,
+        width: '48px',
+        height: '48px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        border: open ? 'transparent' : '1px solid #DADADA',
+        backgroundColor: open ? '#685DC5' : 'transparent',
+        color: open ? 'white' : '#959595'
+      }}
+    >
+      {open ? '-' : '+'}
+    </Flex>
   )
 }
 
 const FAQ = () => {
+  const [openItem, setOpenItem] = useState<string | null>(null)
+  console.log({ openItem })
+
+  const handleItemChange = (value: string) => {
+    setOpenItem(value)
+  }
   return (
-    <Flex direction="column" pb={40} px={40}>
+    <Flex direction="column" pb={40} px={40} id="faq-section">
       <Flex width="100%" alignItems="center" gap={5} pb={10}>
-        <p
+        <SectionTitle
           style={{
-            color: '#685DC5',
-            fontSize: 48,
-            fontWeight: 500,
             marginRight: 'auto',
-            maxWidth: 441,
-            lineHeight: 1.3
+            maxWidth: 441
           }}
         >
           Frequently asked questions
-        </p>
-        <p style={{ color: '#6A6A6A', fontSize: 16, fontWeight: 300 }}>
+        </SectionTitle>
+        <p
+          style={{
+            color: '#6A6A6A',
+            fontSize: 16,
+            fontWeight: 300,
+            marginRight: 250
+          }}
+        >
           Filter by:
         </p>
-        <CustomDropdown />
+        <Flex position="relative" style={{ transform: 'translateY(-24px)' }}>
+          <CustomDropdown />
+        </Flex>
       </Flex>
 
-      <Accordion.Root type="single" collapsible>
+      <Accordion.Root
+        type="single"
+        collapsible
+        onValueChange={handleItemChange}
+      >
         {faqData.map((item) => (
           <Accordion.Item key={item.id} value={item.id}>
             <Accordion.Header>
-              <Accordion.Trigger
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  paddingTop: 16,
-                  paddingBottom: 16,
-                  borderTop: '1px solid #E6E6E6',
-                  alignItems: 'center',
-                  gap: 100,
-                  cursor: 'pointer'
-                }}
-              >
+              <StyledTrigger>
                 <p
                   style={{
-                    color: '#685DC5',
-                    fontWeight: 500,
-                    fontSize: 22,
-                    width: 250,
-                    textAlign: 'left'
+                    width: 250
                   }}
                 >
                   {item.type}
@@ -172,29 +207,14 @@ const FAQ = () => {
                 <p
                   style={{
                     color: '#535353',
-                    fontWeight: 500,
-                    fontSize: 22,
                     marginRight: 'auto'
                   }}
                 >
                   {item.question}
                 </p>
-                <div
-                  style={{
-                    border: '1px solid #DADADA',
-                    color: '#959595',
-                    borderRadius: '100%',
-                    fontWeight: 300,
-                    fontSize: 30,
-                    width: 48,
-                    height: 48,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}
-                >
-                  +
-                </div>
-              </Accordion.Trigger>
+
+                <PlusButton open={openItem === item.id} />
+              </StyledTrigger>
             </Accordion.Header>
             <Accordion.Content>
               <Flex

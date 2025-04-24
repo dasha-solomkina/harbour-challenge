@@ -14,7 +14,8 @@ export const contentStyles = css({
 
 export const itemStyles = css({
   color: '#535353',
-  padding: 1,
+  py: 1,
+  px: 2,
   _highlighted: {
     backgroundColor: '#f5f5f5',
     outline: 'none',

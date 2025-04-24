@@ -1,4 +1,16 @@
-import { Flex } from '../../styled-system/jsx'
+import { Flex, styled } from '../../styled-system/jsx'
+
+const Title = styled('p', {
+  base: {
+    fontWeight: 500
+  }
+})
+
+const SubTitle = styled('p', {
+  base: {
+    fontWeight: 300
+  }
+})
 
 const StickyBar = () => {
   return (
@@ -10,33 +22,35 @@ const StickyBar = () => {
       justifyContent="space-between"
       alignItems="center"
       backgroundColor="white"
-      position="absolute"
+      position="fixed"
       bottom={0}
+      left={0}
       borderTop="1px solid #DADADA"
+      zIndex={9999}
     >
       <Flex direction="column">
-        <p style={{ fontWeight: 500 }}>Zeptolab</p>
-        <p style={{ fontWeight: 300 }}>Marketing Performance</p>
+        <Title>Zeptolab</Title>
+        <SubTitle>Marketing Performance</SubTitle>
       </Flex>
       <Flex direction="column">
-        <p style={{ fontWeight: 500 }}>Location</p>
-        <p style={{ fontWeight: 300 }}>Bangkok</p>
+        <Title>Location</Title>
+        <SubTitle>Bangkok</SubTitle>
       </Flex>
       <Flex direction="column">
-        <p style={{ fontWeight: 500 }}>Duration</p>
-        <p style={{ fontWeight: 300 }}>1 Year Full-Time</p>
+        <Title>Duration</Title>
+        <SubTitle>1 Year Full-Time</SubTitle>
       </Flex>
       <Flex direction="column">
-        <p style={{ fontWeight: 500 }}>Start date</p>
-        <p style={{ fontWeight: 300 }}>3 Aug 2020</p>
+        <Title>Start date</Title>
+        <SubTitle>3 Aug 2020</SubTitle>
       </Flex>
       <Flex direction="column">
-        <p style={{ fontWeight: 500 }}>Application deadline</p>
-        <p style={{ fontWeight: 300 }}>30 June 2020</p>
+        <Title>Application deadline</Title>
+        <SubTitle>30 June 2020</SubTitle>
       </Flex>
       <Flex direction="column">
-        <p style={{ fontWeight: 500 }}>Application closes in</p>
-        <p style={{ fontWeight: 300 }}>6 Day : 22 Hrs : 56 Min</p>
+        <Title>Application closes in</Title>
+        <SubTitle>6 Day : 22 Hrs : 56 Min</SubTitle>
       </Flex>
     </Flex>
   )

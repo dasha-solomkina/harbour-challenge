@@ -1,6 +1,13 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { HamburgerMenuIcon, ExternalLinkIcon } from '@radix-ui/react-icons'
 import { contentStyles, itemStyles, triggerStyles } from './DropdownMenuStyles'
+
+const scrollToSection = (id: string) => {
+  const section = document.getElementById(id)
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 
 const MenuDropDown = () => {
   return (
@@ -16,18 +23,37 @@ const MenuDropDown = () => {
         >
           <DropdownMenu.Item
             className={itemStyles}
-            style={{ color: '#685DC5', fontWeight: 600 }}
+            onSelect={() => scrollToSection('hero-section')}
           >
-            Interaction Design
+            Main
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            className={itemStyles}
+            onSelect={() => scrollToSection('about-section')}
+          >
+            About
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            className={itemStyles}
+            onSelect={() => scrollToSection('faq-section')}
+          >
+            FAQ
           </DropdownMenu.Item>
           <DropdownMenu.Item className={itemStyles}>
-            Admissions
-          </DropdownMenu.Item>
-          <DropdownMenu.Item className={itemStyles}>
-            Harbour.Space
-          </DropdownMenu.Item>
-          <DropdownMenu.Item className={itemStyles}>
-            Living in Barcelona
+            <a
+              href="https://harbour.space/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '8px'
+              }}
+            >
+              Harbour.Space
+              <ExternalLinkIcon />
+            </a>
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

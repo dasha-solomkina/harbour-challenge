@@ -26,7 +26,7 @@ export const SubtitleSmall = styled('p', {
   }
 })
 
-export const CardExtended = () => {
+export const DetailsCardExtended = () => {
   return (
     <Flex
       direction="column"
@@ -37,8 +37,8 @@ export const CardExtended = () => {
       gap={10}
       height={600}
     >
-      <Title>Scholarship value</Title>
-      <p style={{ fontSize: 48, fontWeight: 300 }}>€31,300</p>
+      <Title pl={4}>Scholarship value</Title>
+      <p style={{ fontSize: 48, fontWeight: 300, paddingLeft: 16 }}>€31,300</p>
       <Separator.Root
         orientation="horizontal"
         decorative
@@ -68,7 +68,7 @@ export const CardExtended = () => {
   )
 }
 
-export const Card = () => {
+export const DetailsCard = () => {
   return (
     <Flex
       direction="column"
@@ -89,7 +89,7 @@ export const Card = () => {
           marginTop: 10
         }}
       />
-      <SubtitleSmall fontWeight={300}>
+      <SubtitleSmall>
         Immerse yourself in the professional world during your apprenticeship.
         You’ll learn the ropes from the best and get to apply your newly
         acquired knowledge in the field from day one.
