@@ -20,6 +20,7 @@
     "@radix-ui/react-toast": "^1.2.10",
     "@radix-ui/react-tooltip": "^1.2.3",
     "axios": "^1.8.4",
+    "date-fns": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zustand": "^5.0.3"

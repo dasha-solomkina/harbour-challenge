@@ -1,5 +1,6 @@
 import { Flex, styled } from '../../styled-system/jsx'
 import * as Separator from '@radix-ui/react-separator'
+import { ApprenticeshipDetails } from '../hooks/useApprenticeshipStore'
 
 export const Title = styled('p', {
   base: {
@@ -26,7 +27,11 @@ export const SubtitleSmall = styled('p', {
   }
 })
 
-export const DetailsCardExtended = () => {
+export const DetailsCardExtended = ({
+  apprenticeship
+}: {
+  apprenticeship: ApprenticeshipDetails
+}) => {
   return (
     <Flex
       direction="column"
@@ -38,7 +43,9 @@ export const DetailsCardExtended = () => {
       height={600}
     >
       <Title pl={4}>Scholarship value</Title>
-      <p style={{ fontSize: 48, fontWeight: 300, paddingLeft: 16 }}>€31,300</p>
+      <p
+        style={{ fontSize: 48, fontWeight: 300, paddingLeft: 16 }}
+      >{`€${apprenticeship.total_value}`}</p>
       <Separator.Root
         orientation="horizontal"
         decorative
@@ -53,33 +60,42 @@ export const DetailsCardExtended = () => {
       <Flex p={4} gap={8} wrap="wrap">
         <Flex direction="column">
           <Title>Tuition covered</Title>
-          <SubtitleSmall>€20,900</SubtitleSmall>
+          <SubtitleSmall>{`€${apprenticeship.tuition}`}</SubtitleSmall>
         </Flex>
         <Flex direction="column">
           <Title>Remaining</Title>
-          <SubtitleSmall>€2,000</SubtitleSmall>
+          <SubtitleSmall>{`€${apprenticeship.remaining}`}</SubtitleSmall>
         </Flex>
         <Flex direction="column">
           <Title>Living stipend</Title>
-          <SubtitleSmall>€8,400 (€700/month)</SubtitleSmall>
+          <SubtitleSmall>
+            {`€${apprenticeship.stipend_per_year} (€${apprenticeship.stipend_per_month}/month)`}
+          </SubtitleSmall>
         </Flex>
       </Flex>
     </Flex>
   )
 }
 
-export const DetailsCard = () => {
+interface DetailsCard {
+  title: string
+  subtitle: string
+  text: string
+}
+
+export const DetailsCard = ({ title, subtitle, text }: DetailsCard) => {
   return (
     <Flex
       direction="column"
       border="1px solid #DADADA"
       borderRadius={4}
       minWidth={320}
+      minHeight={200}
       p={5}
       gap={3}
     >
-      <Title>Study commitment</Title>
-      <Subtitle>3 hours / day</Subtitle>
+      <Title>{title}</Title>
+      <Subtitle>{subtitle}</Subtitle>
       <Separator.Root
         orientation="horizontal"
         style={{
@@ -89,11 +105,7 @@ export const DetailsCard = () => {
           marginTop: 10
         }}
       />
-      <SubtitleSmall>
-        Immerse yourself in the professional world during your apprenticeship.
-        You’ll learn the ropes from the best and get to apply your newly
-        acquired knowledge in the field from day one.
-      </SubtitleSmall>
+      <SubtitleSmall>{text}</SubtitleSmall>
     </Flex>
   )
 }

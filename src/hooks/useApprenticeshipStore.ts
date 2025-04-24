@@ -2,6 +2,7 @@ import { createWithEqualityFn } from 'zustand/traditional'
 
 interface FAQ {
   question: string
+  type: string
   answer: {
     type: string
     data: string
@@ -15,8 +16,9 @@ export interface ApprenticeshipDetails {
   location: string
   scholarship_start_date: string
   application_end_date: string
-  duration: string
+  duration: number
   company_name: string
+  company_logo: string
 
   about_text: string
   tuition: number
@@ -40,7 +42,7 @@ interface ApprenticeshipStore {
 const useApprenticeshipStore = createWithEqualityFn<ApprenticeshipStore>(
   (set) => ({
     apprenticeship: undefined,
-    setApprenticeship: (data) => set({ apprenticeship: data }),
-  }),
+    setApprenticeship: (data) => set({ apprenticeship: data })
+  })
 )
 export default useApprenticeshipStore
