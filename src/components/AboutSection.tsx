@@ -1,8 +1,11 @@
 import { Flex } from '../../styled-system/jsx'
 import * as Avatar from '@radix-ui/react-avatar'
 import { SectionTitle } from './HeroSection'
+import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 
 const AboutSection = () => {
+  const { apprenticeship } = useApprenticeshipStore()
+
   return (
     <Flex
       width="100%"
@@ -46,12 +49,7 @@ const AboutSection = () => {
         lineHeight="1.5"
       >
         <SectionTitle>About the apprenticeship</SectionTitle>
-        <p>
-          Our scholarships are designed to give talented and driven young people
-          from any background access to top-class education, experience and
-          network. We offer a fully-funded master’s degree alongside an
-          apprenticeship and a guaranteed job upon graduation.{' '}
-        </p>
+        <p>{apprenticeship?.about_text}</p>
       </Flex>
     </Flex>
   )
