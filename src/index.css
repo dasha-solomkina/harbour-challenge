@@ -1,1 +1,9 @@
 @layer reset, base, tokens, recipes, utilities;
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
