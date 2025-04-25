@@ -2,11 +2,13 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import React from 'react'
+import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 import Header from './Header'
 import HeroSection from './HeroSection'
 import StickyBar from './StickyBar'
 import AboutSection from './AboutSection'
-import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
+import FeedbackCard from './FeedbackCard'
+import FAQ from './FAQ'
 
 // Mock the useApprenticeshipStore hook
 vi.mock('../hooks/useApprenticeshipStore', () => ({
@@ -90,4 +92,31 @@ describe('AboutSection component', () => {
       )
     ).toBeInTheDocument()
   })
+})
+
+describe('FeedbackCard Component', () => {
+  it('should render the avatar image, name, and feedback', () => {
+    render(<FeedbackCard />)
+
+    expect(screen.getByText(/Irene Pereyra/i)).toBeInTheDocument()
+    const feedbackText = screen.getByText(
+      /This Fellowship was a turning point in my career./i
+    )
+    expect(feedbackText).toBeInTheDocument()
+  })
+
+  it('should render a link to LinkedIn', () => {
+    render(<FeedbackCard />)
+    const link = screen.getByRole('link', { name: /in/i })
+    expect(link).toHaveAttribute(
+      'href',
+      'https://www.linkedin.com/school/harbour-space/'
+    )
+  })
+})
+
+test('renders FAQ section with titles', () => {
+  render(<FAQ />)
+  expect(screen.getByText(/Frequently asked questions/i)).toBeInTheDocument()
+  expect(screen.getByText(/Filter by:/i)).toBeInTheDocument()
 })
