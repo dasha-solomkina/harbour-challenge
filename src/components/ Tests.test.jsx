@@ -4,18 +4,15 @@ import '@testing-library/jest-dom'
 import React from 'react'
 import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 import Header from './Header'
-import HeroSection from './HeroSection'
 import StickyBar from './StickyBar'
-import AboutSection from './AboutSection'
-import FeedbackCard from './FeedbackCard'
 import FAQ from './FAQ'
 
-// Mock the useApprenticeshipStore hook
+// Since it is a small project some tests have been added to the same file.
+
 vi.mock('../hooks/useApprenticeshipStore', () => ({
   default: vi.fn()
 }))
 
-// Mock data for the store
 const mockApprenticeship = {
   name: 'Test Apprenticeship',
   description: 'Test Description',
@@ -29,11 +26,8 @@ const mockApprenticeship = {
     'This apprenticeship is a great opportunity to kickstart your tech career!'
 }
 
-// Since it is a small project all test are added to the same file
-
 describe('Header component', () => {
   it('renders correct heading', () => {
-    // Mock the store return value
     useApprenticeshipStore.mockReturnValue({
       apprenticeship: mockApprenticeship
     })
@@ -45,23 +39,8 @@ describe('Header component', () => {
   })
 })
 
-describe('HeroSection component', () => {
-  it('renders correct apprenticeship name', () => {
-    // Mock the store return value
-    useApprenticeshipStore.mockReturnValue({
-      apprenticeship: mockApprenticeship
-    })
-
-    render(<HeroSection />)
-    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-      'Test Apprenticeship'
-    )
-  })
-})
-
 describe('StickyBar component', () => {
   it('renders correct internship details', () => {
-    // Mock the store return value
     useApprenticeshipStore.mockReturnValue({
       apprenticeship: mockApprenticeship
     })
@@ -72,46 +51,6 @@ describe('StickyBar component', () => {
     expect(screen.getByText('Application deadline')).toBeInTheDocument()
     expect(screen.getByText('Application closes in')).toBeInTheDocument()
     expect(screen.getByText('1 Year Full-Time')).toBeInTheDocument()
-  })
-})
-
-describe('AboutSection component', () => {
-  it('renders correct about text', () => {
-    const apprenticeship = {
-      about_text:
-        'This apprenticeship is a great opportunity to kickstart your tech career!'
-    }
-
-    render(<AboutSection apprenticeship={apprenticeship} />)
-    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-      'About the apprenticeship'
-    )
-    expect(
-      screen.getByText(
-        'This apprenticeship is a great opportunity to kickstart your tech career!'
-      )
-    ).toBeInTheDocument()
-  })
-})
-
-describe('FeedbackCard Component', () => {
-  it('should render the avatar image, name, and feedback', () => {
-    render(<FeedbackCard />)
-
-    expect(screen.getByText(/Irene Pereyra/i)).toBeInTheDocument()
-    const feedbackText = screen.getByText(
-      /This Fellowship was a turning point in my career./i
-    )
-    expect(feedbackText).toBeInTheDocument()
-  })
-
-  it('should render a link to LinkedIn', () => {
-    render(<FeedbackCard />)
-    const link = screen.getByRole('link', { name: /in/i })
-    expect(link).toHaveAttribute(
-      'href',
-      'https://www.linkedin.com/school/harbour-space/'
-    )
   })
 })
 

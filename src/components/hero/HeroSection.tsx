@@ -1,9 +1,9 @@
 import { addYears, format } from 'date-fns'
-import { Flex, styled } from '../../styled-system/jsx'
-import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
-import { Title, SubtitleSmall } from './Card'
-import Countdown from './Countdown'
-import { ActionButton } from './FeedbackCard'
+import { Flex, styled } from '../../../styled-system/jsx'
+import useApprenticeshipStore from '../../hooks/useApprenticeshipStore'
+import { Title, SubtitleSmall } from '../Card'
+import Countdown from '../Countdown'
+import { ActionButton } from '../feedback/FeedbackCard'
 
 const Card = styled(Flex, {
   base: {

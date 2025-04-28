@@ -1,6 +1,6 @@
 import * as Avatar from '@radix-ui/react-avatar'
-import { Flex, styled } from '../../styled-system/jsx'
-import { css } from '../../styled-system/css'
+import { Flex, styled } from '../../../styled-system/jsx'
+import { css } from '../../../styled-system/css'
 
 const linkStyle = css({
   cursor: 'pointer',

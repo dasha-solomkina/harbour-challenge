@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { css } from '../../styled-system/css'
-import { Flex, styled } from '../../styled-system/jsx'
+import { css } from '../../../styled-system/css'
+import { Flex, styled } from '../../../styled-system/jsx'
 import FeedbackCard from './FeedbackCard'
 
 const containerStyle = css({
