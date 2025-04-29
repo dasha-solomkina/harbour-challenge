@@ -13,7 +13,12 @@ const containerStyle = css({
   WebkitOverflowScrolling: 'touch',
   px: 4,
   scrollbarWidth: 'none',
-  paddingBottom: 20
+  paddingBottom: 20,
+  cursor: 'grab',
+  '&:active': {
+    cursor: 'grabbing'
+  },
+  userSelect: 'none'
 })
 
 const cardWrapperStyle = css({
@@ -31,7 +36,7 @@ const BackgroundPattern = styled(Flex, {
     width: 1120,
     height: 394,
     zIndex: 0,
-    backgroundImage: "url('public/background.png')",
+    backgroundImage: "url('/background.png')",
     backgroundSize: 'cover',
     backgroundPosition: 'center'
   }
@@ -39,11 +44,43 @@ const BackgroundPattern = styled(Flex, {
 
 const FeedbackSlider = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const isDown = useRef(false)
+  const startX = useRef(0)
+  const scrollLeft = useRef(0)
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDown.current = true
+    startX.current = e.pageX - (scrollRef.current?.offsetLeft || 0)
+    scrollLeft.current = scrollRef.current?.scrollLeft || 0
+  }
+
+  const handleMouseLeave = () => {
+    isDown.current = false
+  }
+
+  const handleMouseUp = () => {
+    isDown.current = false
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown.current || !scrollRef.current) return
+    e.preventDefault()
+    const x = e.pageX - scrollRef.current.offsetLeft
+    const walk = (x - startX.current) * 1.5
+    scrollRef.current.scrollLeft = scrollLeft.current - walk
+  }
 
   return (
     <Flex position="relative" overflow="visible">
       <BackgroundPattern />
-      <Flex ref={scrollRef} className={containerStyle}>
+      <Flex
+        ref={scrollRef}
+        className={containerStyle}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+      >
         {[...Array(5)].map((_, i) => (
           <div key={i} className={cardWrapperStyle}>
             <FeedbackCard />
