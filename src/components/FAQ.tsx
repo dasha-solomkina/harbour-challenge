@@ -5,6 +5,7 @@ import { CaretDownIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
 import { SectionTitle } from './hero/HeroSection'
 import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
+import AnimatedAccordionButton from './AnimatedButton'
 
 const wrapperStyles = (isOpen: boolean) =>
   css({
@@ -107,27 +108,6 @@ const StyledTrigger = styled(Accordion.Trigger, {
   }
 })
 
-const PlusButton = ({ open }: { open: boolean }) => {
-  return (
-    <Flex
-      style={{
-        borderRadius: '100%',
-        fontWeight: 300,
-        fontSize: 30,
-        width: '48px',
-        height: '48px',
-        justifyContent: 'center',
-        alignItems: 'center',
-        border: open ? 'transparent' : '1px solid #DADADA',
-        backgroundColor: open ? '#685DC5' : 'transparent',
-        color: open ? 'white' : '#959595'
-      }}
-    >
-      {open ? '-' : '+'}
-    </Flex>
-  )
-}
-
 const FAQ = () => {
   const { apprenticeship } = useApprenticeshipStore()
   const faqData = apprenticeship?.faq
@@ -206,7 +186,7 @@ const FAQ = () => {
                   {item.question}
                 </p>
 
-                <PlusButton open={openItem === item.question} />
+                <AnimatedAccordionButton isOpen={openItem === item.question} />
               </StyledTrigger>
             </Accordion.Header>
             <Accordion.Content>

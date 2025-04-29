@@ -65,6 +65,10 @@ const HeroSection = () => {
 
   const formattedEndDate = format(endDate, 'dd MMMM yyyy')
 
+  const onApplyNowClick = () => {
+    window.open('https://scholarship.harbour.space/', '_blank')
+  }
+
   return (
     <Flex
       px={60}
@@ -89,7 +93,7 @@ const HeroSection = () => {
         <p>
           <span style={{ fontWeight: 500 }}>Position: </span>Game Analyst Intern
         </p>
-        <ActionButton width={166} height={58}>
+        <ActionButton width={166} height={58} onClick={onApplyNowClick}>
           Apply Now
         </ActionButton>
       </Flex>
