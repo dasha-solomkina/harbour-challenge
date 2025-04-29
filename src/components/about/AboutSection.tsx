@@ -1,7 +1,7 @@
-import { Flex } from '../../styled-system/jsx'
+import { Flex } from '../../../styled-system/jsx'
 import * as Avatar from '@radix-ui/react-avatar'
-import { SectionTitle } from './HeroSection'
-import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
+import { SectionTitle } from '../hero/HeroSection'
+import useApprenticeshipStore from '../../hooks/useApprenticeshipStore'
 
 const AboutSection = () => {
   const { apprenticeship } = useApprenticeshipStore()

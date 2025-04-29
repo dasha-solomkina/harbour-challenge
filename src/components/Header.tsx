@@ -1,5 +1,5 @@
 import { Flex, styled } from '../../styled-system/jsx'
-import MenuDropDown from './MenuDropDown'
+import MenuDropDown from './menu'
 import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 
 const ApplyNowIcon = styled(Flex, {

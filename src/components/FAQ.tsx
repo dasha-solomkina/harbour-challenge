@@ -3,7 +3,7 @@ import * as Accordion from '@radix-ui/react-accordion'
 import { css } from '../../styled-system/css/css'
 import { CaretDownIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
-import { SectionTitle } from './HeroSection'
+import { SectionTitle } from './hero/HeroSection'
 import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 
 const wrapperStyles = (isOpen: boolean) =>

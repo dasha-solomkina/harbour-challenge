@@ -1,13 +1,13 @@
 import { Flex, styled } from '../styled-system/jsx'
-import AboutSection from './components/AboutSection'
 import Details from './components/Details'
 import FAQ from './components/FAQ'
-import FeedbackSlider from './components/FeedbackSlider'
+import FeedbackSlider from './components/feedback/index'
 import Header from './components/Header'
-import HeroSection from './components/HeroSection'
+import HeroSection from './components/hero/HeroSection'
 import StickyBar from './components/StickyBar'
 import { useEffect, useState } from 'react'
 import { useApprenticeship } from './hooks/useApprenticeship'
+import AboutSection from './components/about'
 
 const Container = styled(Flex, {
   base: {
