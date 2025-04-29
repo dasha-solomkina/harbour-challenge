@@ -147,7 +147,11 @@ const FAQ = () => {
         >
           Filter by:
         </p>
-        <Flex position="relative" style={{ transform: 'translateY(-24px)' }}>
+        <Flex
+          position="relative"
+          zIndex={99}
+          style={{ transform: 'translateY(-24px)' }}
+        >
           <CustomDropdown
             filterOptions={filterOptions}
             selected={selectedFilter}
