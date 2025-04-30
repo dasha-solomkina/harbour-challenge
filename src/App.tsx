@@ -50,7 +50,7 @@ function App() {
         <HeroSection isDesktop={isDesktop} />
         {showStickyBar && isDesktop && <StickyBar />}
         <AboutSection />
-        <Details />
+        <Details isDesktop={isDesktop} />
         <FeedbackSlider />
         <FAQ />
       </Container>

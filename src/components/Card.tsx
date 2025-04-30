@@ -21,42 +21,62 @@ const Subtitle = styled('p', {
 export const SubtitleSmall = styled('p', {
   base: {
     color: '#535353',
+    fontSize: { base: 24, lg: 16 },
+    fontWeight: 300,
+    lineHeight: 1.5
+  }
+})
+
+const StyledText = styled('p', {
+  base: {
+    color: '#535353',
     fontSize: 16,
     fontWeight: 300,
     lineHeight: 1.5
   }
 })
 
+const StyledTuitionValue = styled('p', {
+  base: {
+    fontSize: { base: 24, lg: 48 },
+    fontWeight: 300,
+    lineHeight: 1.5,
+    pl: { base: 4, lg: '16px' }
+  }
+})
+
 export const DetailsCardExtended = ({
-  apprenticeship
+  apprenticeship,
+  isDesktop
 }: {
   apprenticeship: ApprenticeshipDetails
+  isDesktop: boolean
 }) => {
   return (
     <Flex
       direction="column"
-      border="1px solid #DADADA"
+      border={{ base: 'none', lg: '1px solid #DADADA' }}
       borderRadius={4}
       minWidth={320}
       p={5}
-      gap={10}
-      height={600}
+      gap={{ base: 0, lg: 10 }}
+      height={{ base: 'auto', lg: 600 }}
     >
       <Title pl={4}>Scholarship value</Title>
-      <p
-        style={{ fontSize: 48, fontWeight: 300, paddingLeft: 16 }}
-      >{`€${apprenticeship.total_value}`}</p>
-      <Separator.Root
-        orientation="horizontal"
-        decorative
-        style={{
-          width: '100%',
-          height: 1,
-          backgroundColor: '#DADADA',
-          marginTop: 'auto',
-          marginBottom: 52
-        }}
-      />
+      <StyledTuitionValue>{`€${apprenticeship.total_value}`}</StyledTuitionValue>
+      {isDesktop && (
+        <Separator.Root
+          orientation="horizontal"
+          decorative
+          style={{
+            width: '100%',
+            height: 1,
+            backgroundColor: '#DADADA',
+            marginTop: 'auto',
+            marginBottom: 52
+          }}
+        />
+      )}
       <Flex p={4} gap={8} wrap="wrap">
         <Flex direction="column">
           <Title>Tuition covered</Title>
@@ -105,7 +125,7 @@ export const DetailsCard = ({ title, subtitle, text }: DetailsCard) => {
           marginTop: 10
         }}
       />
-      <SubtitleSmall>{text}</SubtitleSmall>
+      <StyledText>{text}</StyledText>
     </Flex>
   )
 }
