@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react'
 import { addMonths, addYears, differenceInSeconds } from 'date-fns'
+import { styled } from '../../styled-system/jsx'
+
+const CountdownText = styled('p', {
+  base: {
+    fontSize: { base: 18, lg: '26px' }
+  }
+})
 
 const Countdown = ({ baseDate }: { baseDate: string }) => {
   // The application_end_date is outdated in the API so I am adding 4 years and 8 months for the countdown to work.
@@ -36,13 +43,9 @@ const Countdown = ({ baseDate }: { baseDate: string }) => {
       >
         Application closes in
       </p>
-      <p
-        style={{
-          fontSize: 26
-        }}
-      >
+      <CountdownText>
         {days} Day : {hours} Hrs : {minutes} Min : {seconds} Seg
-      </p>
+      </CountdownText>
     </>
   )
 }

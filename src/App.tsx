@@ -46,8 +46,8 @@ function App() {
   return (
     <>
       <Container>
-        <Header />
-        <HeroSection />
+        <Header isDesktop={isDesktop} />
+        <HeroSection isDesktop={isDesktop} />
         {showStickyBar && isDesktop && <StickyBar />}
         <AboutSection />
         <Details />

@@ -1,7 +1,6 @@
 import { Flex, styled } from '../../styled-system/jsx'
 import MenuDropDown from './menu'
 import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
-import { useState, useEffect } from 'react'
 
 const ApplyNowIcon = styled(Flex, {
   base: {
@@ -42,17 +41,11 @@ const Subtitle = styled('span', {
   }
 })
 
-const Header = () => {
+const Header = ({ isDesktop }: { isDesktop: boolean }) => {
   const { apprenticeship } = useApprenticeshipStore()
-  const [isDesktop, setIsDesktop] = useState(true)
-
-  useEffect(() => {
-    const screenIsDesktop = window.innerWidth >= 1440
-    setIsDesktop(screenIsDesktop)
-  }, [])
 
   return (
-    <Flex height={130} direction="column">
+    <Flex height={65} direction="column">
       <Flex
         height={65}
         backgroundColor="#685DC5"
@@ -70,7 +63,11 @@ const Header = () => {
         <MenuDropDown />
       </Flex>
       {isDesktop && (
-        <Flex height={65} position="relative">
+        <Flex
+          height={65}
+          position="relative"
+          display={{ base: 'none', lg: 'flex' }}
+        >
           <ApplyNowIcon>
             APPLY
             <br />
