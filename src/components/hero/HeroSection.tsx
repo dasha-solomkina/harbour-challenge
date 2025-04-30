@@ -47,8 +47,7 @@ export const SectionTitle = styled('h2', {
     fontSize: { base: 32, lg: 48 },
     lineHeight: '1.3',
     maxWidth: 440,
-    mb: { base: 0, lg: 8 },
-    px: { base: 0, lg: 10 }
+    mb: { base: 0, lg: 8 }
   }
 })
 
@@ -78,7 +77,9 @@ const HeroSection = ({ isDesktop }: { isDesktop: boolean }) => {
       gap={{ base: 8, lg: 0 }}
       pt={{ base: 4, md: 6, lg: 20 }}
     >
-      <SectionTitle>{apprenticeship.name}</SectionTitle>
+      <SectionTitle px={{ base: 0, lg: 10 }}>
+        {apprenticeship.name}
+      </SectionTitle>
 
       <Flex
         direction={{ base: 'column', lg: 'row' }}
