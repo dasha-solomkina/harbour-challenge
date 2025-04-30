@@ -21,8 +21,12 @@ const Container = styled(Flex, {
 function App() {
   const [showStickyBar, setShowStickyBar] = useState(false)
   const { loading } = useApprenticeship()
+  const [isDesktop, setIsDesktop] = useState(true)
 
   useEffect(() => {
+    const screenIsDesktop = window.innerWidth >= 1440
+    setIsDesktop(screenIsDesktop)
+
     const handleScroll = () => {
       const scrollY = window.scrollY
       const heroHeight =
@@ -44,7 +48,7 @@ function App() {
       <Container>
         <Header />
         <HeroSection />
-        {showStickyBar && <StickyBar />}
+        {showStickyBar && isDesktop && <StickyBar />}
         <AboutSection />
         <Details />
         <FeedbackSlider />
