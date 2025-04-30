@@ -34,7 +34,7 @@ const Details = ({ isDesktop }: { isDesktop: boolean }) => {
       gap={10}
       px={{ base: 4, md: 40, lg: 80 }}
       mt={{ base: 0, lg: 20 }}
-      mb={60}
+      mb={{ base: 0, lg: 60 }}
       direction={{ base: 'column', lg: 'row' }}
       align="stretch"
     >

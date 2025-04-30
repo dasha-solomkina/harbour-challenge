@@ -51,7 +51,7 @@ function App() {
         {showStickyBar && isDesktop && <StickyBar />}
         <AboutSection />
         <Details isDesktop={isDesktop} />
-        <FeedbackSlider />
+        <FeedbackSlider isDesktop={isDesktop} />
         <FAQ />
       </Container>
     </>

@@ -1,9 +1,8 @@
 import { addYears, format } from 'date-fns'
 import { Flex, styled } from '../../../styled-system/jsx'
 import useApprenticeshipStore from '../../hooks/useApprenticeshipStore'
-import { Title, SubtitleSmall } from '../Card'
+import { Title, StyledText } from '../Card'
 import Countdown from '../Countdown'
-import { ActionButton } from '../feedback/FeedbackCard'
 
 const Card = styled(Flex, {
   base: {
@@ -48,6 +47,22 @@ export const SectionTitle = styled('h2', {
     lineHeight: '1.3',
     maxWidth: 440,
     mb: { base: 0, lg: 8 }
+  }
+})
+
+const ActionButton = styled('button', {
+  base: {
+    backgroundColor: '#685DC5',
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 500,
+    py: 2,
+    px: 4,
+    borderRadius: 50,
+    cursor: 'pointer',
+    _hover: {
+      backgroundColor: '#6d2cf3'
+    }
   }
 })
 
@@ -118,21 +133,21 @@ const HeroSection = ({ isDesktop }: { isDesktop: boolean }) => {
           <Card>
             <DetailsContainer>
               <Title>Location</Title>
-              <SubtitleSmall>{apprenticeship.location}</SubtitleSmall>
+              <StyledText>{apprenticeship.location}</StyledText>
             </DetailsContainer>
             <DetailsContainer>
               <Title>Duration</Title>
-              <SubtitleSmall>
+              <StyledText>
                 {`${apprenticeship.duration} Year Full-Time`}
-              </SubtitleSmall>
+              </StyledText>
             </DetailsContainer>
             <DetailsContainer>
               <Title>Start date</Title>
-              <SubtitleSmall>{formattedStartDate}</SubtitleSmall>
+              <StyledText>{formattedStartDate}</StyledText>
             </DetailsContainer>
             <DetailsContainer>
               <Title>End date</Title>
-              <SubtitleSmall>{formattedEndDate}</SubtitleSmall>
+              <StyledText>{formattedEndDate}</StyledText>
             </DetailsContainer>
           </Card>
         </Flex>

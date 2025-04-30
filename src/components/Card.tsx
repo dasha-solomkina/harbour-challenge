@@ -27,7 +27,7 @@ export const SubtitleSmall = styled('p', {
   }
 })
 
-const StyledText = styled('p', {
+export const StyledText = styled('p', {
   base: {
     color: '#535353',
     fontSize: 16,
