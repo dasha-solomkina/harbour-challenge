@@ -67,6 +67,10 @@ const HeroSection = ({ isDesktop }: { isDesktop: boolean }) => {
 
   const formattedEndDate = format(endDate, 'dd MMMM yyyy')
 
+  const onApplyNowClick = () => {
+    window.open('https://scholarship.harbour.space/', '_blank')
+  }
+
   return (
     <Flex
       px={{ base: 6, md: 10, lg: 40 }}
@@ -150,7 +154,7 @@ const HeroSection = ({ isDesktop }: { isDesktop: boolean }) => {
             <span style={{ fontWeight: 500 }}>Position: </span>Game Analyst
             Intern
           </p>
-          <ActionButton width={166} height={58}>
+          <ActionButton width={166} height={58} onClick={onApplyNowClick}>
             Apply Now
           </ActionButton>
         </Flex>
