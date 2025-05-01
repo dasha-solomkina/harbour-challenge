@@ -1,59 +1,31 @@
-import { Flex, styled } from '../../styled-system/jsx'
+import { Flex } from '../../../styled-system/jsx'
 import * as Accordion from '@radix-ui/react-accordion'
-import { css } from '../../styled-system/css/css'
 import { CaretDownIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
-import { SectionTitle } from './hero/HeroSection'
-import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
-import AnimatedAccordionButton from './AnimatedButton'
+import { SectionTitle } from '../hero/HeroSection'
+import useApprenticeshipStore from '../../hooks/useApprenticeshipStore'
+import AnimatedAccordionButton from '../AnimatedButton'
+import {
+  wrapperStyles,
+  triggerRow,
+  itemStyles,
+  typeStyle,
+  questionStyle,
+  StyledTrigger,
+  filterStyle
+} from './FAQStyles'
 
-const wrapperStyles = (isOpen: boolean) =>
-  css({
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    border: '1px solid #DADADA',
-    borderRadius: 30,
-    padding: '12px 24px',
-    cursor: 'pointer',
-    color: '#685DC5',
-    fontSize: 18,
-    fontWeight: 500,
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    zIndex: 1000,
-    maxHeight: isOpen ? '300px' : '50px',
-    overflow: 'hidden',
-    transition: 'max-height 0.3s ease-in-out',
-    boxShadow: isOpen ? '0px 4px 8px rgba(0, 0, 0, 0.1)' : 'none'
-  })
-
-const triggerRow = css({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  width: 250
-})
-
-const itemStyles = css({
-  padding: '8px 16px',
-  color: '#535353',
-  cursor: 'pointer',
-  _hover: {
-    backgroundColor: '#f5f5f5'
-  }
-})
+type CustomDropdownProps = {
+  filterOptions: string[]
+  selected: string
+  onSelect: (value: string) => void
+}
 
 const CustomDropdown = ({
   filterOptions,
   selected,
   onSelect
-}: {
-  filterOptions: string[]
-  selected: string
-  onSelect: (value: string) => void
-}) => {
+}: CustomDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleSelect = (option: string) => {
@@ -93,21 +65,6 @@ const CustomDropdown = ({
   )
 }
 
-const StyledTrigger = styled(Accordion.Trigger, {
-  base: {
-    width: '100%',
-    display: 'flex',
-    py: '16px',
-    borderTop: '1px solid #E6E6E6',
-    alignItems: 'center',
-    cursor: 'pointer',
-    fontWeight: 500,
-    fontSize: 22,
-    textAlign: 'start',
-    color: '#685DC5'
-  }
-})
-
 const FAQ = () => {
   const { apprenticeship } = useApprenticeshipStore()
   const faqData = apprenticeship?.faq
@@ -127,8 +84,14 @@ const FAQ = () => {
   )
 
   return (
-    <Flex direction="column" pb={40} px={40} id="faq-section">
-      <Flex width="100%" alignItems="center" gap={5} pb={10}>
+    <Flex direction="column" pb={40} px={{ base: 10, md: 40 }} id="faq-section">
+      <Flex
+        width="100%"
+        gap={5}
+        pb={10}
+        direction={{ base: 'column', md: 'row' }}
+        alignItems={{ base: 'flex-start', md: 'center' }}
+      >
         <SectionTitle
           style={{
             marginRight: 'auto',
@@ -137,20 +100,14 @@ const FAQ = () => {
         >
           Frequently asked questions
         </SectionTitle>
-        <p
-          style={{
-            color: '#6A6A6A',
-            fontSize: 16,
-            fontWeight: 300,
-            marginRight: 300
-          }}
-        >
-          Filter by:
-        </p>
+        <p className={filterStyle}>Filter by:</p>
         <Flex
           position="relative"
           zIndex={99}
-          style={{ transform: 'translateY(-24px)' }}
+          justifyContent={{ base: 'center', md: 'flex-start' }}
+          width={{ base: '100%', md: 'auto' }}
+          pb={{ base: 8, lg: 0 }}
+          transform={{ base: 'none', lg: 'translateY(-24px)' }}
         >
           <CustomDropdown
             filterOptions={filterOptions}
@@ -169,37 +126,18 @@ const FAQ = () => {
           <Accordion.Item key={item.question} value={item.question}>
             <Accordion.Header>
               <StyledTrigger>
-                <p
-                  style={{
-                    width: 300,
-                    marginRight: 30
-                  }}
-                >
-                  {item.type}
-                </p>
-                <p
-                  style={{
-                    color: '#535353',
-                    marginRight: 'auto',
-
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis'
-                  }}
-                >
-                  {item.question}
-                </p>
-
+                <p className={typeStyle}>{item.type}</p>
+                <p className={questionStyle}>{item.question}</p>
                 <AnimatedAccordionButton isOpen={openItem === item.question} />
               </StyledTrigger>
             </Accordion.Header>
             <Accordion.Content>
               <Flex
                 fontWeight={300}
-                fontSize={22}
+                fontSize={{ base: 18, lg: 22 }}
                 color="#535353"
-                pl={350}
-                pr={20}
+                pl={{ base: 0, lg: 350 }}
+                pr={{ base: 0, lg: 20 }}
                 pb={10}
               >
                 {item.answer[0].data}

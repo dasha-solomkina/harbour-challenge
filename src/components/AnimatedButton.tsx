@@ -4,8 +4,9 @@ import { useEffect } from 'react'
 
 const AnimatedAccordionButton = ({ isOpen }: { isOpen: boolean }) => {
   const controls = useAnimation()
+  const screenIsDesktop = window.innerWidth >= 1440
 
-  const size = 48
+  const size = screenIsDesktop ? 48 : 24
   const strokeWidth = 2
   const radius = (size - strokeWidth) / 2
   const circumference = 2 * Math.PI * radius
@@ -26,7 +27,8 @@ const AnimatedAccordionButton = ({ isOpen }: { isOpen: boolean }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          flexShrink: 0
         })
       )}
     >

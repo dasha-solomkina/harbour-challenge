@@ -1,6 +1,6 @@
 import { Flex, styled } from '../styled-system/jsx'
 import Details from './components/Details'
-import FAQ from './components/FAQ'
+import FAQ from './components/faq/FAQ'
 import FeedbackSlider from './components/feedback/index'
 import Header from './components/Header'
 import HeroSection from './components/hero/HeroSection'
