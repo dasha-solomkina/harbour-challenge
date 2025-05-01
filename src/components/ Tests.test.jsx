@@ -5,7 +5,7 @@ import React from 'react'
 import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 import Header from './Header'
 import StickyBar from './StickyBar'
-import FAQ from './FAQ'
+import FAQ from './faq'
 
 // Since it is a small project some tests have been added to the same file.
 

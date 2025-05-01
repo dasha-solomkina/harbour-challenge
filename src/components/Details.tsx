@@ -5,7 +5,7 @@ import useApprenticeshipStore from '../hooks/useApprenticeshipStore'
 
 const SeparatorWithText = () => {
   return (
-    <Flex align="center" gap="2">
+    <Flex align="center" gap="4">
       <Separator.Root
         orientation="horizontal"
         decorative
@@ -23,17 +23,29 @@ const SeparatorWithText = () => {
   )
 }
 
-const Details = () => {
+const Details = ({ isDesktop }: { isDesktop: boolean }) => {
   const { apprenticeship } = useApprenticeshipStore()
   if (!apprenticeship) return <></>
 
   return (
-    <Flex width="100%" justifyContent="center" gap={10} px={80} mt={20} mb={60}>
+    <Flex
+      width="100%"
+      justifyContent="center"
+      gap={10}
+      px={{ base: 4, md: 40, lg: 80 }}
+      mt={{ base: 0, lg: 20 }}
+      mb={{ base: 0, lg: 60 }}
+      direction={{ base: 'column', lg: 'row' }}
+      align="stretch"
+    >
       <Flex>
-        <DetailsCardExtended apprenticeship={apprenticeship} />
+        <DetailsCardExtended
+          apprenticeship={apprenticeship}
+          isDesktop={isDesktop}
+        />
       </Flex>
       <Flex direction="column" gap={10}>
-        <Flex gap={10}>
+        <Flex gap={10} direction={{ base: 'column', lg: 'row' }}>
           <DetailsCard
             title="Study commitment"
             subtitle={`${apprenticeship.study_commitment} hours/day`}

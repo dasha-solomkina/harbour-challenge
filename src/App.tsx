@@ -1,6 +1,6 @@
 import { Flex, styled } from '../styled-system/jsx'
 import Details from './components/Details'
-import FAQ from './components/FAQ'
+import FAQ from './components/faq/FAQ'
 import FeedbackSlider from './components/feedback/index'
 import Header from './components/Header'
 import HeroSection from './components/hero/HeroSection'
@@ -21,8 +21,12 @@ const Container = styled(Flex, {
 function App() {
   const [showStickyBar, setShowStickyBar] = useState(false)
   const { loading } = useApprenticeship()
+  const [isDesktop, setIsDesktop] = useState(true)
 
   useEffect(() => {
+    const screenIsDesktop = window.innerWidth >= 1440
+    setIsDesktop(screenIsDesktop)
+
     const handleScroll = () => {
       const scrollY = window.scrollY
       const heroHeight =
@@ -42,12 +46,12 @@ function App() {
   return (
     <>
       <Container>
-        <Header />
-        <HeroSection />
-        {showStickyBar && <StickyBar />}
+        <Header isDesktop={isDesktop} />
+        <HeroSection isDesktop={isDesktop} />
+        {showStickyBar && isDesktop && <StickyBar />}
         <AboutSection />
-        <Details />
-        <FeedbackSlider />
+        <Details isDesktop={isDesktop} />
+        <FeedbackSlider isDesktop={isDesktop} />
         <FAQ />
       </Container>
     </>

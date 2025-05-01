@@ -42,7 +42,7 @@ const BackgroundPattern = styled(Flex, {
   }
 })
 
-const FeedbackSlider = () => {
+const FeedbackSlider = ({ isDesktop }: { isDesktop: boolean }) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const isDown = useRef(false)
   const startX = useRef(0)
@@ -72,7 +72,7 @@ const FeedbackSlider = () => {
 
   return (
     <Flex position="relative" overflow="visible">
-      <BackgroundPattern />
+      {isDesktop && <BackgroundPattern />}
       <Flex
         ref={scrollRef}
         className={containerStyle}

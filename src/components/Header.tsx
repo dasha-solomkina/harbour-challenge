@@ -20,11 +20,32 @@ const ApplyNowIcon = styled(Flex, {
   }
 })
 
-const Header = () => {
+const Title = styled('h1', {
+  base: {
+    fontWeight: 700,
+    fontSize: {
+      base: '1.2rem',
+      md: '1.5rem',
+      lg: '1.2rem'
+    }
+  }
+})
+
+const Subtitle = styled('span', {
+  base: {
+    fontSize: {
+      base: '0.7rem',
+      md: '0.9rem',
+      lg: '1rem'
+    }
+  }
+})
+
+const Header = ({ isDesktop }: { isDesktop: boolean }) => {
   const { apprenticeship } = useApprenticeshipStore()
 
   return (
-    <Flex height={130} direction="column">
+    <Flex height={65} direction="column">
       <Flex
         height={65}
         backgroundColor="#685DC5"
@@ -32,22 +53,28 @@ const Header = () => {
         width="100%"
         justifyContent="space-between"
         alignItems="center"
-        px={50}
-        py={25}
+        px={{ base: 4, md: 6, lg: 10 }}
+        py={{ base: 3, md: 4, lg: 6 }}
       >
         <Flex gap={2}>
-          <h1 style={{ fontWeight: 700 }}>HARBOUR.SPACE</h1>
-          <span style={{ fontSize: '0.8rem' }}>/{apprenticeship?.name}</span>
+          <Title>HARBOUR.SPACE</Title>
+          <Subtitle>/{apprenticeship?.name}</Subtitle>
         </Flex>
         <MenuDropDown />
       </Flex>
-      <Flex height={65} position="relative">
-        <ApplyNowIcon>
-          APPLY
-          <br />
-          NOW
-        </ApplyNowIcon>
-      </Flex>
+      {isDesktop && (
+        <Flex
+          height={65}
+          position="relative"
+          display={{ base: 'none', lg: 'flex' }}
+        >
+          <ApplyNowIcon>
+            APPLY
+            <br />
+            NOW
+          </ApplyNowIcon>
+        </Flex>
+      )}
     </Flex>
   )
 }
