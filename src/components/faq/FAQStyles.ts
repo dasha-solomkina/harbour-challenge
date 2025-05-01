@@ -41,7 +41,7 @@ export const itemStyles = css({
 })
 
 export const typeStyle = css({
-  display: { base: 'none', md: 'flex' },
+  display: { base: 'none', lg: 'flex' },
   width: 300,
   marginRight: 30
 })
@@ -58,7 +58,7 @@ export const filterStyle = css({
   color: '#6A6A6A',
   fontSize: 16,
   fontWeight: 300,
-  marginRight: { base: 0, lg: 300 }
+  marginRight: { base: 0, md: 300 }
 })
 
 export const StyledTrigger = styled(Accordion.Trigger, {
